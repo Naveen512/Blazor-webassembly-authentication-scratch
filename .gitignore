@@ -3,3 +3,5 @@
 ################################################################################
 
 /.vs/BlazorWasm.JwtAuthLearning
+/BlazorWasm.JwtAuthLearning/bin/Debug/netstandard2.1
+/BlazorWasm.JwtAuthLearning/obj

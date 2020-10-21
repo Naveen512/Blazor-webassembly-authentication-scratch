@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30523.141
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorWasm.JwtAuthLearning", "BlazorWasm.JwtAuthLearning\BlazorWasm.JwtAuthLearning.csproj", "{347267CF-5F9B-45B6-A2FE-18C785ED0BDB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{347267CF-5F9B-45B6-A2FE-18C785ED0BDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{347267CF-5F9B-45B6-A2FE-18C785ED0BDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{347267CF-5F9B-45B6-A2FE-18C785ED0BDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{347267CF-5F9B-45B6-A2FE-18C785ED0BDB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7AA5AEFF-8F25-433D-BF73-DF17D1E48F28}
+	EndGlobalSection
+EndGlobal

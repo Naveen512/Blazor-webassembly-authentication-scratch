@@ -1,0 +1,60 @@
+﻿@page "/"
+@inject IAccountService _accountService;
+<div>
+    <AuthorizeView>
+        <Authorized>
+            <h1>Your Dashboard - Your Claims</h1>
+            <div>
+                @foreach (var claim in userClaim)
+                {
+                    <div>@claim.Type - @claim.Value</div>
+                }
+            </div>
+            <div>
+                <button type="button" class="btn btn-primary"  @onclick="Logout">Logout</button>
+            </div>
+        </Authorized>
+        <NotAuthorized>
+            <h1>!Oops you need to be login to view your dashboard</h1>
+            <div>
+                <div class="form-group">
+                    <label for="inputEmail">Email Address</label>
+                    <input type="email" class="form-control" id="inputEmail" @bind="@model.Email" />
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword">Password</label>
+                    <input type="password" class="form-control" id="inputPassword" @bind="@model.Password" />
+                </div>
+                <button type="button" class="btn btn-primary" @onclick="Login">Login</button>
+            </div>
+        </NotAuthorized>
+    </AuthorizeView>
+</div>
+
+@code{ 
+    [CascadingParameter]
+    private Task<AuthenticationState> authenticationState { get; set; }
+    private IList<Claim> userClaim
+    {
+        get
+        {
+            var auth =  authenticationState.Result;
+            if (auth.User.Identity.IsAuthenticated)
+            {
+                return auth.User.Claims.ToList();
+            }
+            return new List<Claim>();
+        }
+    }
+    private LoginModel model = new LoginModel();
+
+    private async Task Login()
+    {
+        await _accountService.LoginAsync(model);
+    }
+
+    private async void Logout()
+    {
+        await _accountService.LogoutAsync();
+    }
+}
