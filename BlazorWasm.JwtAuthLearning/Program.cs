@@ -27,6 +27,8 @@ namespace BlazorWasm.JwtAuthLearning
             builder.Services.AddAuthorizationCore();
             builder.Services.AddBlazoredLocalStorage();
             builder.Services.AddScoped<IAccountService, AccountService>();
+            builder.Services.AddScoped<ITokenManagerService, TokenManagerService>();
+            builder.Services.AddScoped<ITodoService, TodoService>();
 
 
             await builder.Build().RunAsync();

@@ -55,6 +55,7 @@ namespace BlazorWasm.JwtAuthLearning.Services
             }
             AuthResponse authData = await response.Content.ReadFromJsonAsync<AuthResponse>();
             await _localStorageService.SetItemAsync("token", authData.Token);
+            await _localStorageService.SetItemAsync("refreshToken", authData.RefreshToken);
             (_customAuthenticationProvider as CustomAuthenticationProvider).Notify();
             return true;
         }

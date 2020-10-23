@@ -1,17 +1,35 @@
 ﻿@page "/"
 @inject IAccountService _accountService;
+@inject ITodoService _todoService;
 <div>
     <AuthorizeView>
         <Authorized>
             <h1>Your Dashboard - Your Claims</h1>
+            <div>
+                <button type="button" class="btn btn-primary" @onclick="Logout">Logout</button>
+            </div>
             <div>
                 @foreach (var claim in userClaim)
                 {
                     <div>@claim.Type - @claim.Value</div>
                 }
             </div>
+            <br/>
             <div>
-                <button type="button" class="btn btn-primary"  @onclick="Logout">Logout</button>
+                @if (todos.Count == 0)
+                {
+                    <div>
+                        <button type="button" class="btn btn-primary" @onclick="GetTodos">See Your Todos</button>
+                    </div>
+                }
+
+                <ul>
+                    @foreach (var item in todos)
+                    {
+                        <li>@item</li>
+                    }
+                </ul>
+
             </div>
         </Authorized>
         <NotAuthorized>
@@ -31,14 +49,14 @@
     </AuthorizeView>
 </div>
 
-@code{ 
+@code{
     [CascadingParameter]
     private Task<AuthenticationState> authenticationState { get; set; }
     private IList<Claim> userClaim
     {
         get
         {
-            var auth =  authenticationState.Result;
+            var auth = authenticationState.Result;
             if (auth.User.Identity.IsAuthenticated)
             {
                 return auth.User.Claims.ToList();
@@ -47,14 +65,20 @@
         }
     }
     private LoginModel model = new LoginModel();
+    private List<string> todos = new List<string>();
 
     private async Task Login()
     {
         await _accountService.LoginAsync(model);
     }
 
-    private async void Logout()
+    private async Task Logout()
     {
         await _accountService.LogoutAsync();
+    }
+
+    private async Task GetTodos()
+    {
+        todos = await _todoService.GetTodos();
     }
 }
